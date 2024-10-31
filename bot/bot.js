@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-require('dotenv').config();
+
 const BOT_TOKEN=''
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
