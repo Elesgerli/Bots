@@ -1,4 +1,4 @@
-require("dotenv").config();
+
 const { Telegraf, Markup, session } = require("telegraf");
 const express = require('express');
 const fetch = require('node-fetch');
@@ -7,10 +7,11 @@ const app = express();
 const bodyParser = require("body-parser");
 const axios = require("axios");
 
+const BOT_TOKEN=""
+const SERVER_URL=""
+const port = 4040;
 
-const port = process.env.PORT || 4040;
-const hook = process.env.WEBHOOK_URL;
-const{BOT_TOKEN, SERVER_URL} = process.env
+
 
 const TELEGRAM_API=`https://api.telegram.org/bot${BOT_TOKEN}`;
 const URI = `/webhook/${BOT_TOKEN}`;
@@ -23,28 +24,26 @@ const init = async () => {
     console.log(res.data)
 }
 
-app.listen(process.env.PORT || 5000, async () => {
-    console.log('app is running on port', process.env.PORT || 5000)
+app.listen(port, async () => {
+    console.log('app is running on port', port)
     await init()
 })
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf(BOT_TOKEN);
 
-const web_link = "https://shibdemo.netlify.app";
+const web_link = "";
 
 bot.start((ctx) => {
   const startPayload = ctx.startPayload;
   const urlSent = `${web_link}?ref=${startPayload}`;
-  // const urlSentTwo = `${web_linkTwo}?ref=${startPayload}`;
+
   const user = ctx.message.from;
   const userName = user.username ? `@${user.username}` : user.first_name;
-  ctx.replyWithMarkdown(`*Hey, ${userName}! Welcome to MaxiTap!*
-
-Click on Play Now and Tap on the coin and see your balance riseрџ”Ґ Eran tokens and anticipate huge airdrops!`, {
+  ctx.replyWithMarkdown(`*Hey, ${userName}! Welcome`, {
       reply_markup: {
           inline_keyboard: [
-            [{ text: "вљЎпёЏPlay now!вљЎпёЏ", web_app: { url: urlSent } }]
-            // [{ text: "Bot App Demo 2 рџ§©", web_app: { url: urlSentTwo } }],
+            [{ text: "Hi", web_app: { url: urlSent } }]
+            
           
           ],
           in: true
